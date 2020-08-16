@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block head %}
+    <style>
+        html, body, #knowi-sso-bar {
+            height: 800px;
+        }
+    </style>
+    <script src="https://knowi.com/minify/knowi-api.min.js"></script>
+    <!-- *********** Edit here *********** -->
+    <script type="text/javascript">
+        function loadChart() {
+            Knowi.render('#knowi-sso-bar', {
+                type: 'nlp',
+                token: '{{ g.token }}',
+                view: {
+                    nlpOptions: {
+                        icon: "off",
+                        css: {
+                            background: 'transparent',
+                            width: '80%'
+                        },
+                        placeholder: "Try: total sales for canada this week",
+                        help: "on",
+                        helpText: "Ability to customize the help text of the question mark"
+                    }
+                }
+            });
+        }
+    </script>
+{% endblock %}
+
+{% block body %}
+    <h1 class="text-center">Global R'Us</h1>
+    {% if not g.user %}
+        <div class="row">
+            <div class="col-sm-6 offset-sm-3">
+                <div class="jumbotron">
+                    Simple use-case proof of concept, embedding Knowi with Single Sign On and Okta Authentication.
+                    Sign-in or create an account to begin!
+                </div>
+            </div>
+        </div>
+    {% else %}
+
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">Well done!</h4>
+            <p>Aww yeah, you successfully read this important alert message.
+               You can use <a href="https://docs.knowi.com/hc/en-us/articles/360010881674-Natural-Language-Processing">Knowi's Search Analytics</a>
+               to ask questions on your data. Ask away! It's your data, don't be shy!.</p>
+        </div>
+
+        <div id="knowi-sso-bar">
+            <script type="text/javascript">
+                loadChart();
+            </script>
+        </div>
+
+    {% endif %}
+
+
+{% endblock %}

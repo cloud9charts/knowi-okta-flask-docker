@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block title %}Dashboard{% endblock %}
+{% block head %}
+    <style>
+        html, body, #knowi-sso {
+            height: 800px;
+            {#width: 1300px;#}
+        }
+    </style>
+
+    <script src="https://knowi.com/minify/knowi-api.min.js"></script>
+    <!-- *********** Edit here *********** -->
+    <script type="text/javascript">
+        function loadChart() {
+            Knowi.render('#knowi-sso', {
+                type: 'single', // use single for SSO
+                token: '{{ g.token }}', // SSO session token
+                view: {
+                    title: true, // visibility of widget title and control buttons
+                    filter: true, // visibility of dashboard/widget filter
+                    autoHeight: false, // auto adjusts dashboard height
+                    border: true, // visibility of widget borders
+                    setting: true, // visibility of widget settings button
+                    resize: false, // allows widget to be resized by user
+                    menu: true, // visibility of side menu with system actions. Only applicable when type is 'single'
+                    drag: false, // allows to drag and re-arrange widget by user
+                    header: true, // visibility of dashboard header (including title and dashboard filter)
+                    scroll: true, // enables dashboard scroll
+                    analytics: false, // enables widget analytics. Only applicable with type 'shareWidget' and 'shareWidgetSecure'
+                    backgroundColor: 'transparent',
+                    css: ["https://viaattachments.blob.core.windows.net/testcontainer/knowi.css"],
+                }
+            });
+        }
+    </script>
+{% endblock %}
+
+{% block body %}
+
+    <h3 class="text-center">Analytics</h3>
+    <div class="row">
+        <div class="col-sm-8 offset-sm-2">
+            <p>Welcome back, <code>{{ g.user.profile.firstName }}!</code></p>
+
+        </div>
+    </div>
+    <div id="knowi-sso"">
+        <script type="text/javascript">
+            loadChart();
+        </script>
+    </div>
+
+{% endblock %}
