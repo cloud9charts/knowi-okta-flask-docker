@@ -1,5 +1,5 @@
 ### Knowi-Okta-Flask-Docker
-A simple Flask app to access Knowi using Okta for user registration and login.
+A simple Flask app to access Knowi Single-Sign-On using Okta for user registration and login.
 
 In this tutorial, you’ll use Okta to store the user accounts for your web app, and you’ll use 
 OpenID Connect to talk to Okta to handle the authentication and authorization to 
